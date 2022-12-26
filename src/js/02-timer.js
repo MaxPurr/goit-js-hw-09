@@ -56,7 +56,7 @@ btnStart.addEventListener("click", () => {
     btnStart.setAttribute("disabled", true);
     timerId = setInterval(() => {
         remainingTime -= 1000;
-        convertedTime = convertMs(remainingTime);
+        const convertedTime = convertMs(remainingTime);
         days.textContent = addLeadingZero(convertedTime.days);
         hours.textContent = addLeadingZero(convertedTime.hours);
         minutes.textContent = addLeadingZero(convertedTime.minutes);
