@@ -32,7 +32,7 @@ const options = {
 const picker = document.querySelector("input#datetime-picker");
 flatpickr(picker, options);
 
-function addLeadingZero(value) {
+function addLeadingZero(value) {  
     return (value.toString()).padStart(2, '0');
 }
 
