@@ -55,11 +55,16 @@ let timerId = null;
 btnStart.addEventListener("click", () => {
     btnStart.setAttribute("disabled", true);
     timerId = setInterval(() => {
-        remainingTime -= 1000;
+      remainingTime -= 1000;
+      if (remainingTime <= 0) {
+        clearInterval(timerId);
+      }
+      else {
         const convertedTime = convertMs(remainingTime);
         days.textContent = addLeadingZero(convertedTime.days);
         hours.textContent = addLeadingZero(convertedTime.hours);
         minutes.textContent = addLeadingZero(convertedTime.minutes);
         seconds.textContent = addLeadingZero(convertedTime.seconds);
+      }
     }, 1000);
 });
