@@ -15,10 +15,9 @@ const options = {
   time_24hr: true,
   defaultDate: new Date(),
   minuteIncrement: 1,
-    onClose(selectedDates) {
+    onClose([selectedDate]) {
         clearInterval(timerId);
-        const selectedDate = selectedDates[0];
-        remainingTime = selectedDate - new Date();
+        remainingTime = selectedDate - Date.now();
         if (remainingTime <=0) {
           Notiflix.Notify.failure('Please choose a date in the future');
           btnStart.setAttribute("disabled", true);
@@ -51,6 +50,12 @@ function convertMs(ms) {
 }
 
 let timerId = null;
+function updateValues(time) {
+  days.textContent = addLeadingZero(time.days);
+  hours.textContent = addLeadingZero(time.hours);
+  minutes.textContent = addLeadingZero(time.minutes);
+  seconds.textContent = addLeadingZero(time.seconds);
+}
 
 btnStart.addEventListener("click", () => {
     btnStart.setAttribute("disabled", true);
@@ -61,10 +66,7 @@ btnStart.addEventListener("click", () => {
       }
       else {
         const convertedTime = convertMs(remainingTime);
-        days.textContent = addLeadingZero(convertedTime.days);
-        hours.textContent = addLeadingZero(convertedTime.hours);
-        minutes.textContent = addLeadingZero(convertedTime.minutes);
-        seconds.textContent = addLeadingZero(convertedTime.seconds);
+        updateValues(convertedTime);
       }
     }, 1000);
 });
